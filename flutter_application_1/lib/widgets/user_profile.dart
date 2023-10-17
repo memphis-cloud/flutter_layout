@@ -3,11 +3,22 @@ import 'package:flutter/material.dart';
 class UserProfile extends StatelessWidget {
   UserProfile({super.key});
 
-  List<MenuRowData> MenuRow = [
+  List<MenuRowData> MenuRow1 = [
     MenuRowData(Icons.favorite, "Избранное"),
     MenuRowData(Icons.phone, "Звонки"),
     MenuRowData(Icons.computer, "Устройства"),
     MenuRowData(Icons.folder, "Папка с чатами"),
+  ];
+
+  List<MenuRowData> MenuRow2 = [
+    MenuRowData(Icons.notifications, "Уведомления и звуки"),
+    MenuRowData(Icons.security, "Конфиденциальность"),
+    MenuRowData(Icons.memory, "Данные и память"),
+    MenuRowData(Icons.design_services_outlined, "Оформление"),
+    MenuRowData(Icons.language, "Язык"),
+    MenuRowData(Icons.sticky_note_2_outlined, "Стикеры"),
+    MenuRowData(Icons.energy_savings_leaf, "Энергосбережение"),
+    MenuRowData(Icons.help, "Помощь"),
   ];
 
   @override
@@ -19,15 +30,23 @@ class UserProfile extends StatelessWidget {
       body: Container(
         width: double.infinity,
         color: Colors.grey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
-            UserInfo(),
-            SizedBox(
-              height: 30,
-            ),
-            _MenuWidget(MenuRow: MenuRow),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                UserInfo(),
+                SizedBox(
+                  height: 30,
+                ),
+                _MenuWidget(MenuRow: MenuRow1),
+                SizedBox(
+                  height: 30,
+                ),
+                _MenuWidget(MenuRow: MenuRow2),
+              ],
+            )
           ],
         ),
       ),
@@ -40,29 +59,38 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: Colors.white,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 15,
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          color: Colors.white,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              UserImage(),
+              SizedBox(
+                height: 15,
+              ),
+              UserName(),
+              SizedBox(
+                height: 10,
+              ),
+              UserPhone(),
+              SizedBox(
+                height: 10,
+              ),
+              UserLogin(),
+            ],
           ),
-          UserImage(),
-          SizedBox(
-            height: 15,
-          ),
-          UserName(),
-          SizedBox(
-            height: 10,
-          ),
-          UserPhone(),
-          SizedBox(
-            height: 10,
-          ),
-          UserLogin(),
-        ],
-      ),
+        ),
+        Positioned(
+          top: 15,
+          right: 8,
+          child: Text('Изм.'),
+        ),
+      ],
     );
   }
 }
